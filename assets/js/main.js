@@ -53,7 +53,7 @@ const posts = [
         "media": "https://unsplash.it/600/400?image=24",
         "author": {
             "name": "Luca Formicola",
-            "image": null
+            "image": "https://unsplash.it/300/300?image=12"
         },
         "likes": 56,
         "created": "2021-04-03"
@@ -100,7 +100,7 @@ posts.forEach(post => {
     <div class="post__footer">
         <div class="likes js-likes">
             <div class="likes__cta">
-                <a class="like-button  js-like-button" href="#" data-postid="1">
+                <a class="like-button  js-like-button" href="javascript:;" data-postid="1">
                     <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                     <span class="like-button__label">Mi Piace</span>
                 </a>
@@ -126,16 +126,47 @@ posts.forEach(post => {
 
 
 /*
-Milestone 3
-Se clicchiamo sul tasto "Mi Piace" cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo. Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
+    Milestone 3
+    Se clicchiamo sul tasto "Mi Piace":
+    - cambiamo il colore al testo del bottone 
+    - incrementiamo il counter dei likes relativo. 
+    Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
+*/
 
+const likeParam = posts.map(post => {
+    return { id: post.id, likes: post.likes };
+});
+
+//mi creo una lista dei btn
+const likesBtn = document.querySelectorAll(".like-button");
+
+//quindi entro nella lista e affibbio una fnz ad ogni like
+for (let i = 0; i < likeParam.length; i++) {
+    likeParam[i].btn = likesBtn[i];
+}
+
+likeParam.forEach(param => {
+    const btn = param.btn;
+    const id = param.id;
+    btn.addEventListener("click", function (e) {
+        btn.classList.add("like-button--liked");
+
+        e.preventDefault();
+    })
+
+})
+
+const likedPosts = [];
+
+
+/*
 BONUS
-Formattare le date in formato italiano (gg/mm/aaaa)
-Gestire l'assenza dell'immagine profilo con un elemento di fallback che contiene le iniziali dell'utente (es. Luca Formicola > LF).
-Al click su un pulsante "Mi Piace" di un post, se abbiamo già cliccato dobbiamo decrementare il contatore e cambiare il colore del bottone.
-Consigli del giorno:
-Ragioniamo come sempre a step. Prima scriviamo nei commenti la logica in italiano e poi traduciamo in codice. console.log() è nostro amico. Quando un pezzo di codice funziona, chiediamoci se possiamo scomporlo in funzioni più piccole.
-Nota (bonus extra) - super opzionale:
-Poiché é la parte logica ad interessarci in questa fase del corso, nello starter kit c'é il marup che potete usare per volgere l'esercizio.
-Se finite la parte logica ed i vari bonus e vi avanza tempo per giocare un pó, pensate pure ad un layout differente e lavorateci su come bonus extra.
+    Formattare le date in formato italiano (gg/mm/aaaa)
+    Gestire l'assenza dell'immagine profilo con un elemento di fallback che contiene le iniziali dell'utente (es. Luca Formicola > LF).
+    Al click su un pulsante "Mi Piace" di un post, se abbiamo già cliccato dobbiamo decrementare il contatore e cambiare il colore del bottone.
+    Consigli del giorno:
+    Ragioniamo come sempre a step. Prima scriviamo nei commenti la logica in italiano e poi traduciamo in codice. console.log() è nostro amico. Quando un pezzo di codice funziona, chiediamoci se possiamo scomporlo in funzioni più piccole.
+    Nota (bonus extra) - super opzionale:
+    Poiché é la parte logica ad interessarci in questa fase del corso, nello starter kit c'é il marup che potete usare per volgere l'esercizio.
+    Se finite la parte logica ed i vari bonus e vi avanza tempo per giocare un pó, pensate pure ad un layout differente e lavorateci su come bonus extra.
 */
