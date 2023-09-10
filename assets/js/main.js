@@ -15,7 +15,7 @@ Per le immagini va bene utilizzare qualsiasi servizio di placeholder ad es. Unsp
 
 const posts = [
     {
-        "id": 1,
+        "id": 0,
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/300?image=171",
         "author": {
@@ -26,7 +26,7 @@ const posts = [
         "created": "2021-06-25"
     },
     {
-        "id": 2,
+        "id": 1,
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/400?image=112",
         "author": {
@@ -37,7 +37,7 @@ const posts = [
         "created": "2021-09-03"
     },
     {
-        "id": 3,
+        "id": 2,
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/400?image=234",
         "author": {
@@ -48,7 +48,7 @@ const posts = [
         "created": "2021-05-15"
     },
     {
-        "id": 4,
+        "id": 3,
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/400?image=24",
         "author": {
@@ -59,7 +59,7 @@ const posts = [
         "created": "2021-04-03"
     },
     {
-        "id": 5,
+        "id": 4,
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/400?image=534",
         "author": {
@@ -131,9 +131,10 @@ posts.forEach(post => {
     Se clicchiamo sul tasto "Mi Piace":
     - cambiamo il colore al testo del bottone 
     - incrementiamo il counter dei likes relativo. 
-    Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
+   
 */
 
+//creo un nuovo array con id e like
 const likeParam = posts.map(post => {
     return { id: post.id, likes: post.likes };
 });
@@ -144,15 +145,36 @@ const likesBtn = document.querySelectorAll(".like-button");
 //quindi entro nella lista e affibbio una fnz ad ogni like
 for (let i = 0; i < likeParam.length; i++) {
     likeParam[i].btn = likesBtn[i];
+
 }
 
-likeParam.forEach(param => {
-    const btn = param.btn;
-    const id = param.id;
-    btn.addEventListener("click", function (e) {
-        btn.classList.add("like-button--liked");
+const newArrLiked = []//creo il nuovo array dei post likeati
 
-        e.preventDefault();
+likeParam.forEach(param => {
+    const btn = param.btn; //prendiamo i btn
+    const id = param.id; //prendiamo l'id
+    btn.addEventListener("click", function (e) { //cicliamo il listener su tutti i btn
+        btn.classList.add("like-button--liked"); //diamo il colore al like tramite la classe css
+    
+        const likeCounter = document.getElementById("like-counter-" + id); //prendiamo il counter di ogni post
+        posts[id]["likes"] = posts[id]["likes"] + 1;//aggiungiamo il like ai like di partenza
+        console.log(posts[id]["likes"]);
+        likeCounter.innerHTML = (posts[id]["likes"]); //mettiamo in pgn
+            
+        // Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
+        if (!newArrLiked.includes(id)) {
+            newArrLiked.push(id)
+        } 
+        console.log(newArrLiked);
+        
+        /*
+        Se il nuovo array ha già dentro l'id non inserirlo, 
+        altrimenti inseriscilo nell'array
+        */
+
+
+
+        e.preventDefault(); //evitiamo l'autoaggiornamento della pgn
     })
 
 })
@@ -166,15 +188,14 @@ const likedPosts = [];
 // })
 
 
-const likeCounter = document.getElementById("like-counter-1");
 const btn1 = document.getElementById("btn-1");
 
-btn1.addEventListener("click", function (e){
-    //let x = posts[0]["likes"]; //= posts.index.likes
-    posts[0]["likes"] = posts[0]["likes"] + 1;
-    console.log(posts[0]["likes"]);
-    likeCounter.innerHTML = (posts[0]["likes"]);
-})
+// btn1.addEventListener("click", function (e){
+//     //let x = posts[0]["likes"]; //= posts.index.likes
+   
+// })
+
+
 
 /*
 BONUS
