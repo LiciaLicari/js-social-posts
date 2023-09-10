@@ -100,10 +100,10 @@ posts.forEach(post => {
     <div class="post__footer">
         <div class="likes js-likes">
             <div class="likes__cta">
-                <a id="btn-${post.id}" class="like-button  js-like-button" href="javascript:;" data-postid="1">
+                <button id="btn-${post.id}" class="like-button  js-like-button" href="javascript:;" data-postid="1">
                     <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                     <span class="like-button__label">Mi Piace</span>
-                </a>
+                </button>
             </div>
             <div class="likes__counter">
                 Piace a <b id="like-counter-${post.id}" class="js-likes-counter">${post.likes}</b> persone
@@ -162,15 +162,18 @@ likeParam.forEach(param => {
         likeCounter.innerHTML = (posts[id]["likes"]); //mettiamo in pgn
             
         // Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
-        if (!newArrLiked.includes(id)) {
-            newArrLiked.push(id)
-        } 
-        console.log(newArrLiked);
-        
         /*
         Se il nuovo array ha già dentro l'id non inserirlo, 
         altrimenti inseriscilo nell'array
         */
+        if (!newArrLiked.includes(id)) {
+            newArrLiked.push(id)
+        } 
+        console.log(newArrLiked);
+        btn.setAttribute("disabled", "");//ho cambiato il markup da a a btn per disabilitare il click
+
+
+        
 
 
 
