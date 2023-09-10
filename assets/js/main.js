@@ -1,17 +1,12 @@
-/*
-Milestone 1
-Creiamo il nostro array di oggetti che rappresentano ciascun post.
-Ogni post dovrà avere le informazioni necessarie per stampare la relativa card:
-id del post, numero progressivo da 1 a n
-nome autore,
-foto autore,
-data in formato americano (mm-gg-yyyy),
-testo del post,
-immagine (non tutti i post devono avere una immagine),
-numero di likes.
-Non è necessario creare date casuali
-Per le immagini va bene utilizzare qualsiasi servizio di placeholder ad es. Unsplash (https://unsplash.it/300/300?image=<id>)
-*/
+//Formattare le date in formato italiano (gg/mm/aaaa)
+
+function itFormatDate (usDate){
+    let dayResult = usDate.substring(8, 10);
+    let monthResult = usDate.substring(5, 7);
+    let yearResult = usDate.substring(0, 4);
+    let itDateResult = dayResult + "-" + monthResult + "-" + yearResult;
+    return itDateResult;
+}
 
 const posts = [
     {
@@ -89,7 +84,7 @@ posts.forEach(post => {
             </div>
             <div class="post-meta__data">
                 <div class="post-meta__author">${post.author.name}</div>
-                <div class="post-meta__time">${post.created}</div>
+                <div class="post-meta__time">${itFormatDate(post.created)}</div>
             </div>                    
         </div>
     </div>
@@ -200,13 +195,14 @@ const btn1 = document.getElementById("btn-1");
 
 
 
-/*
+/*newArrLiked.push(id)
 BONUS
-    Formattare le date in formato italiano (gg/mm/aaaa)
+    
     Gestire l'assenza dell'immagine profilo con un elemento di fallback che contiene le iniziali dell'utente (es. Luca Formicola > LF).
     Al click su un pulsante "Mi Piace" di un post, se abbiamo già cliccato dobbiamo decrementare il contatore e cambiare il colore del bottone.
     Consigli del giorno:
-    Ragioniamo come sempre a step. Prima scriviamo nei commenti la logica in italiano e poi traduciamo in codice. console.log() è nostro amico. Quando un pezzo di codice funziona, chiediamoci se possiamo scomporlo in funzioni più piccole.
+    Ragioniamo come sempre a step. Prima scriviamo nei commenti la logica in italiano e poi traduciamo in codice. console.log() è nostro amico. 
+    Quando un pezzo di codice funziona, chiediamoci se possiamo scomporlo in funzioni più piccole.
     Nota (bonus extra) - super opzionale:
     Poiché é la parte logica ad interessarci in questa fase del corso, nello starter kit c'é il marup che potete usare per volgere l'esercizio.
     Se finite la parte logica ed i vari bonus e vi avanza tempo per giocare un pó, pensate pure ad un layout differente e lavorateci su come bonus extra.
