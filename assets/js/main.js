@@ -100,13 +100,13 @@ posts.forEach(post => {
     <div class="post__footer">
         <div class="likes js-likes">
             <div class="likes__cta">
-                <a class="like-button  js-like-button" href="javascript:;" data-postid="1">
+                <a id="btn-${post.id}" class="like-button  js-like-button" href="javascript:;" data-postid="1">
                     <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                     <span class="like-button__label">Mi Piace</span>
                 </a>
             </div>
             <div class="likes__counter">
-                Piace a <b id="like-counter-1" class="js-likes-counter">${post.likes}</b> persone
+                Piace a <b id="like-counter-${post.id}" class="js-likes-counter">${post.likes}</b> persone
             </div>
         </div> 
     </div>            
@@ -118,6 +118,7 @@ posts.forEach(post => {
     postContainerDOM.insertAdjacentHTML("beforeend", postMarkUp);
 
 });
+
 
 
 
@@ -158,6 +159,22 @@ likeParam.forEach(param => {
 
 const likedPosts = [];
 
+// //associo a btn1 l'aumento di 1like
+// btn.addEventListener("click", function (ev){
+//     btn
+
+// })
+
+
+const likeCounter = document.getElementById("like-counter-1");
+const btn1 = document.getElementById("btn-1");
+
+btn1.addEventListener("click", function (e){
+    //let x = posts[0]["likes"]; //= posts.index.likes
+    posts[0]["likes"] = posts[0]["likes"] + 1;
+    console.log(posts[0]["likes"]);
+    likeCounter.innerHTML = (posts[0]["likes"]);
+})
 
 /*
 BONUS
